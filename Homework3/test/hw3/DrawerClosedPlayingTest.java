@@ -1,10 +1,9 @@
 package hw3;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 import org.junit.Test;
+
 
 
 public class DrawerClosedPlayingTest {
@@ -12,19 +11,19 @@ public class DrawerClosedPlayingTest {
 	@Test
 	public void testGetInstance() {
 		DrawerClosedPlaying drawerClosedPlaying1 = DrawerClosedPlaying.getInstance();
-		assertNotNull("drawerClosedPlaying1 is null.", drawerClosedPlaying1);
+		assertThat("drawerClosedPlaying1 is null.", drawerClosedPlaying1,is(notNullValue()));
 		
 		DrawerClosedPlaying drawerClosedPlaying2 = DrawerClosedPlaying.getInstance();
-		assertNotNull("drawerClosedPlaying2 is null.", drawerClosedPlaying2);
+		assertThat("drawerClosedPlaying2 is null.", drawerClosedPlaying2,is(notNullValue()));
 		
-		assertEquals("DrawerClosedPlaying violates singleton propertirs.", drawerClosedPlaying1, drawerClosedPlaying2);
+		assertThat("DrawerClosedPlaying violates singleton propertirs.", drawerClosedPlaying1, is(sameInstance(drawerClosedPlaying2)));
 	}
 
 	@Test
 	public void testOpenCloseButtonPushed() {
 		DrawerClosedPlaying state = DrawerClosedPlaying.getInstance();
 		state.openCloseButtonPushed();
-		assertEquals(DrawerOpen.getInstance(), DVDPlayer.getInstance().getState());
+		assertThat(DVDPlayer.getInstance().getState(),is(DrawerOpen.getInstance()));
 	}
 
 	@Test
@@ -36,7 +35,7 @@ public class DrawerClosedPlayingTest {
 	public void testStopButtonPushed() {
 		DrawerClosedPlaying state = DrawerClosedPlaying.getInstance();
 		state.stopButtonPushed();
-		assertEquals(DrawerClosedNotPlaying.getInstance(), DVDPlayer.getInstance().getState());
+		assertThat( DVDPlayer.getInstance().getState(),is(DrawerClosedNotPlaying.getInstance()));
 	}
 
 }

@@ -1,9 +1,10 @@
 package hw3;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 import org.junit.Test;
+
+
 
 
 public class DVDPlayerTest {
@@ -12,19 +13,19 @@ public class DVDPlayerTest {
 	public void testGetInstance() {
 		System.out.println("DVDPlayer get instance testing.....");
 		DVDPlayer dVDPlayer1 = DVDPlayer.getInstance();
-		assertNotNull("dVDPlayer1 is null.", dVDPlayer1);
+		assertThat("dVDPlayer1 is null.", dVDPlayer1,is(notNullValue()));
 		
 		DVDPlayer dVDPlayer2 = DVDPlayer.getInstance();
-		assertNotNull("dVDPlayer2 is null.", dVDPlayer2);
+		assertThat("dVDPlayer2 is null.", dVDPlayer2, is(notNullValue()));
 		
-		assertEquals("DVDPlayer violates singleton propertirs.", dVDPlayer1, dVDPlayer2);
+		assertThat("DVDPlayer violates singleton propertirs.", dVDPlayer1, is(sameInstance(dVDPlayer2)));
 	}
 	@Test
 	public void testChangeState() {
 		System.out.println("DVDPlayer Change State testing");
 		DVDPlayer player = DVDPlayer.getInstance();
 		player.changeState(DrawerClosedNotPlaying.getInstance());
-		assertEquals(DrawerClosedNotPlaying.getInstance(),player.getState());
+		assertThat(player.getState(),is(sameInstance(DrawerClosedNotPlaying.getInstance())));
 	}
 	@Test
 	public void testGetState() {
@@ -32,7 +33,7 @@ public class DVDPlayerTest {
 		DVDPlayer player = DVDPlayer.getInstance();
 		player.changeState(DrawerClosedNotPlaying.getInstance());
 		State state = player.getState();
-		assertEquals(DrawerClosedNotPlaying.getInstance(), state);
+		assertThat(state,is(DrawerClosedNotPlaying.getInstance()));
 		
 	}
 
@@ -43,14 +44,14 @@ public class DVDPlayerTest {
 		
 		player.changeState(DrawerClosedNotPlaying.getInstance());
 		player.openCloseButtonPushed();
-		assertEquals(DrawerOpen.getInstance(), player.getState());
+		assertThat(player.getState(),is(sameInstance(DrawerOpen.getInstance())));
 		
 		player.openCloseButtonPushed();
-		assertEquals(DrawerClosedNotPlaying.getInstance(), player.getState());
+		assertThat(player.getState(),is(sameInstance(DrawerClosedNotPlaying.getInstance())));
 		
 		player.changeState(DrawerClosedPlaying.getInstance());
 		player.openCloseButtonPushed();
-		assertEquals(DrawerOpen.getInstance(), player.getState());
+		assertThat(player.getState(),is(sameInstance(DrawerOpen.getInstance())));
 	}
 	@Test
 	public void testPlayButtonPushed() {
@@ -58,11 +59,11 @@ public class DVDPlayerTest {
 		
 		player.changeState(DrawerClosedNotPlaying.getInstance());
 		player.playButtonPushed();
-		assertEquals(DrawerClosedPlaying.getInstance(), player.getState());
+		assertThat(player.getState(),is(sameInstance(DrawerClosedPlaying.getInstance())));
 		
 		player.changeState(DrawerOpen.getInstance());
 		player.playButtonPushed();
-		assertEquals(DrawerClosedPlaying.getInstance(), player.getState());	
+		assertThat(player.getState(),is(sameInstance(DrawerClosedPlaying.getInstance())));	
 		
 	}
 	@Test
@@ -71,7 +72,7 @@ public class DVDPlayerTest {
 		
 		player.changeState(DrawerClosedPlaying.getInstance());
 		player.stopButtonPushed();
-		assertEquals(DrawerClosedNotPlaying.getInstance(), player.getState());
+		assertThat(player.getState(),is(sameInstance(DrawerClosedNotPlaying.getInstance())));
 		
 		
 		

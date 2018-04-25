@@ -13,36 +13,38 @@ public class CD implements Command { // change directory
 		this.s = s;
 	}
 
-	public CD() {
+	public CD() {		
 		this.current = fs.getRoot();
 	}
 
 	@Override
 	public void execute() {
 		
-		if(!this.s.isEmpty()) {
-			current =  fs.getElementFromfullPath(s);
-		}
-		
-		if (current != null)
-		{
-			if(current  instanceof Directory)
-			{
-				Directory d = (Directory) current;
-				fs.setCurrentDirectory(d);
+			if(null != this.s && !this.s.isEmpty()) {				
+				current =  fs.getElementFromfullPath(s);
 			}
-			else 
+			
+			if (current != null)
 			{
-				fs.setCurrentDirectory(current.getParent());
-			}			
-		}
-		else
-		{
-			System.out.println("No Such Directory Exists!!!");
-		}
-//		Command pwd = new PWD();
-//		pwd.execute();		
-		return;
+				if(current  instanceof Directory)
+				{
+					Directory d = (Directory) current;
+					fs.setCurrentDirectory(d);
+				}
+				else 
+				{
+					fs.setCurrentDirectory(current.getParent());
+				}			
+			}
+			else
+			{
+				System.out.println("No Such Directory Exists!!!");
+			}
+//			Command pwd = new PWD();
+//			pwd.execute();		
+			return;
+		
+		
 	}
 
 	

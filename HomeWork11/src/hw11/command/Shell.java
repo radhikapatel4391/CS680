@@ -14,6 +14,24 @@ public class Shell {
 	{
 		//commandhistory = CommandHistory.getInstance();
 	}
+	public static void main(String[] args) throws Exception
+	{
+		FileSystem fs = FileSystem.getInstance();
+		fs.createFileSystem();
+		
+		System.out.println("\n");
+		System.out.println("WelCome to Shell Script...Try some Command.....on above shown directory structure...!!! \n");
+		Scanner in = new Scanner(System.in);
+		while(true){
+			System.out.println("\n");
+			Command pwd = new PWD();
+			pwd.execute();
+			System.out.println(" Shell>");
+			String commandStr = in.nextLine().trim();
+			//System.out.println(command);
+			execute(commandStr);
+		}
+	}
 	public static void execute(String s)	
 	{	
 		String command[] = s.split(" ");
@@ -21,7 +39,8 @@ public class Shell {
 		Command commandInstance = null;
 		String c = command[0].toUpperCase();
 		//System.out.println(c);
-		if(c.contains("PWD")){			
+		if(c.contains("PWD"))
+		{			
 			commandInstance = new PWD();			
 		}		
 		else if(c.equalsIgnoreCase("CD") && (len==1)) 
@@ -95,36 +114,36 @@ public class Shell {
 		else{
 			System.out.println("Invalid Command.......\n");
 			System.out.println("-----------------------------------------------------------------------------------\n");
-			System.out.println("– pwd\r\n" + "Print the current working directory.\r\n\n" + 
-					"– cd dirName\r\n" +"Change the current directory to the specified directory. Accept a relative (not absolute) directory name. Accept “..”\r\n" + 
+			System.out.println("PWD\r\n" + "Print the current working directory.\r\n\n" + 
+					"CD dirName\r\n" +"Change the current directory to the specified directory. Accept a relative (not absolute) directory name. Accept \r\n" + 
 					"(move to the parent directory of the current directory.) \r\n\n" + 
-					"– cd\r\n" +"Change the current directory to the root directory.\r\n\n" + 
-					"– ls\r\n" +"Print the name of every file, directory and link in the current directory.\r\n\n" + 
-					"– dir\r\n" + 
+					"CD\r\n" +"Change the current directory to the root directory.\r\n\n" + 
+					"LS\r\n" +"Print the name of every file, directory and link in the current directory.\r\n\n" + 
+					"DIR\r\n" + 
 					"Print the information (i.e., kind, name, size and owner) of every file, directory and link in the current directory.\r\n\n" + 
-					"– dir dir/fileName \r\n" + 
-					"Print the specified directory’s/file’s information. Accept relative (not absolute) directory name. Accept “..”\r\n\n" + 
-					"– mkdir dirName\r\n" + 
+					"DIR dir/fileName \r\n" + 
+					"Print the specified directory s/file s information. Accept relative (not absolute) directory name. Accept \r\n\n" + 
+					"MKDIR dirName\r\n" + 
 					"Make the specified directory in the current directory.\r\n\n" + 
-					"– rmdir dirName \r\n" + 
+					"RMDIR dirName \r\n" + 
 					"Remove the specified directory in the current directory.\r\n\n" + 
-					"– ln target (real) dir/file link(alias)Name\r\n" + 
+					"LN target (real) dir/file link(alias)Name\r\n" + 
 					"Make a link\r\n\n" + 
-					"– mv dir/file destination dirPath \r\n" + 
+					"MV dir/file destinationDirPath \r\n" + 
 					"Move a directory/file to the detonation directoryPath \r\n\n" + 
-					"– cp dir/file destination dir\r\n" + 
-					"Copy a directory/file to the destination directoryPath \r\n\n" + 
-					"– chown newName dirPath \r\n" + 
+					"CP dir/file destinationDirPath\r\n" + 
+					"copy a directory/file to the destination directoryPath \r\n\n" + 
+					"CHOWN newName dirPath \r\n" + 
 					"Change the owner of a file/directory\r\n\n" + 
-					"– history\r\n" + 
+					"HISTORY\r\n" + 
 					"Print a sequence of previously-executed commands.\r\n\n" + 
-					"– redo\r\n" + 
+					"REDO\r\n" + 
 					"Redo the most recently-executed command.\r\n\n" + 
-					"– sort\r\n" + 
+					"SORT \r\n" + 
 					"Sort directories and files in the current directory \n\n"+
-					"– exit\r\n" + 
+					"EXIT \r\n" + 
 					"Exit from shell \n\n"+
-					"– show\r\n" + 
+					"SHOW \r\n" + 
 					"show directory structure \n\n");
 			System.out.println("-----------------------------------------------------------------------------------\n");
 			return;
@@ -143,21 +162,6 @@ public class Shell {
 		
 		
 	}
-	public static void main(String[] args) throws Exception{
-		FileSystem fs = FileSystem.getInstance();
-		fs.createFileSystem();
-		
-		System.out.println("\n");
-		System.out.println("WelCome to Shell Script...!!! \n");
-		Scanner in = new Scanner(System.in);
-		while(true){
-			//System.out.println("\n");
-			Command pwd = new PWD();
-			pwd.execute();
-			System.out.println(" Shell>");
-			String commandStr = in.nextLine().trim();
-			//System.out.println(command);
-			execute(commandStr);
-		}
-}
+	
+	
 }

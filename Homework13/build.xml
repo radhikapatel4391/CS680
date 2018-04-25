@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="Homework11" basedir="." default="Shell">
+<project name="Homework13" basedir="." default="test">
 	<property environment="env" />
 	<path id="test.classpath">
 		<pathelement path="${env.JUNIT}" />
 		<pathelement path="${env.HAMCREST_CORE}" />
 		<pathelement path="bin/src" />
 		<pathelement path="bin/test" />
-		<pathelement path="bin/src/hw11.command" />
 	</path>
 
 	<target name="clean">
@@ -46,10 +45,4 @@
 			</batchtest>
 		</junit>
 	</target>
-	<target name="Shell" depends="test">			
-	        <java classname="hw11.command.Shell" failonerror="true" fork="yes">
-	            <classpath refid="test.classpath"/>
-	        </java>
-	    	<echo message="Radhikabahen Patel, 01729309" />
-	    </target>
 </project>

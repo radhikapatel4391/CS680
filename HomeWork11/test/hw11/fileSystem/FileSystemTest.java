@@ -15,15 +15,15 @@ import org.junit.Before;
 public class FileSystemTest {
 	
 	FileSystem fs = FileSystem.getInstance();
-	Directory root;
+	Directory root,pictures,system,home;
 	
 	@Before
 	public void setup() {
-		Directory root = new Directory(null, "root", "RD");
+		root = new Directory(null, "root", "RD");
 		fs.setRoot(root);
-		Directory home = new Directory(root,"home","RD");
-		Directory system = new Directory(root,"system","RD");
-		Directory pictures = new Directory(home,"pictures","RD");
+		home = new Directory(root,"home","RD");
+		system = new Directory(root,"system","RD");
+		pictures = new Directory(home,"pictures","RD");
 		File a = new File(system, "a", "RD", 5);
 		File b = new File(system, "b","RD", 10);
 		File c = new File(system, "c","RD",100);
@@ -70,6 +70,20 @@ public class FileSystemTest {
 		fs.setRoot(newroot);
 		assertThat(fs.getRoot(), is (sameInstance (newroot)));
 	}
-	
+	@Test
+	public void testgetElementFromfullPath() {
+		FSElement fe = fs.getElementFromfullPath("root/home/pictures");
+		assertThat(fe, is (sameInstance (pictures)));
+		fs.setCurrentDirectory(pictures);
+		fe = fs.getElementFromfullPath("..");
+		assertThat(fe, is (sameInstance (home)));
+		
+	}
+	@Test
+	public void testaddChild() {
+		Directory newChild = new Directory(null, "newChild", "RD");
+		fs.addChild(home, newChild);
+		assertThat(home.getChildDirUsingName("newChild"), is (sameInstance (newChild)));
+	}
 
 }

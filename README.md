@@ -1,6 +1,7 @@
 # CS680
 Object Oriented Design  
 Different Object Oriented Design Patter implementation  
+HW 3 - Decorative Design Pattern
 HW 1-7 = Design pattern like Singleton, Factory, Iterator, static  
 HW08 = Multicast and Observer Design Pattern Implementation with Stock Monitor
 Example  
